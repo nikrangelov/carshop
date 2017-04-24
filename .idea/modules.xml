@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/carshop.iml" filepath="$PROJECT_DIR$/.idea/modules/carshop.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/carshop_main.iml" filepath="$PROJECT_DIR$/.idea/modules/carshop_main.iml" group="carshop" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/carshop_test.iml" filepath="$PROJECT_DIR$/.idea/modules/carshop_test.iml" group="carshop" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repos-carshop_main.iml" filepath="$PROJECT_DIR$/.idea/modules/repos-carshop_main.iml" group="carshop" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/repos-carshop_test.iml" filepath="$PROJECT_DIR$/.idea/modules/repos-carshop_test.iml" group="carshop" />
     </modules>
   </component>
 </project>

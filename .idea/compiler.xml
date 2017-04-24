@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="carshop_main" target="1.8" />
       <module name="carshop_test" target="1.8" />
+      <module name="repos-carshop_main" target="1.8" />
+      <module name="repos-carshop_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
