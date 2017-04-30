@@ -1,5 +1,8 @@
 package carshop.entities;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -34,6 +37,7 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name="user_id")
+    @JsonIgnore
     User user;
 
     public User getUser() {

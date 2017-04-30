@@ -27,7 +27,7 @@ public class User {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_car", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "car_id"))
-    private Set<Role> cars;
+    private Set<Car> cars;
 
     public int getActive() {
         return active;
@@ -72,4 +72,7 @@ public class User {
     public void addRole(Role role){
         this.roles.add(role);
     }
+
+    public void addCar(Car car){ this.cars.add(car); }
+
 }
