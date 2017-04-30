@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+<div class="col-md-4" style="padding:10px 10px">
+    <form action="/logout" method="post">
+        <input type="submit" value="Log Out"/>
+    </form>
+</div>
+
+<script>
+    $.ajax({
+        xhrFields: {
+            withCredentials: true
+        },
+        type: "GET",
+        url: "http://localhost:8080/private/greeting"
+    }).done(function (data) {
+        console.log(data);
+    });
+</script>
+
+<div class='container'>
+    <div id='root'></div>
+</div>
+
+</body>
+</html>
