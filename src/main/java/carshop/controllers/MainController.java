@@ -20,4 +20,9 @@ public class MainController {
     public String addCar() {
         return "add_car";
     }
+
+    @RequestMapping(value = "/list")
+    public String list() {
+        return "list";
+    }
 }
