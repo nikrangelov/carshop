@@ -6,6 +6,8 @@ import carshop.repositories.RoleRepository;
 import carshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,10 +51,10 @@ public class UserController {
             return "register";
         }
 
-        Role role = roleRepository.findByRole("USER");
+        Role role = roleRepository.findByRole("ROLE_USER");
         if (role == null) {
             role = new Role();
-            role.setRole("USER");
+            role.setRole("ROLE_USER");
             roleRepository.save(role);
         }
 
@@ -60,6 +62,9 @@ public class UserController {
         user.setEmail(username);
         user.setPassword(password);
         userService.saveUser(user);
+
+        SecurityContextHolder.getContext().setAuthentication(
+                new UsernamePasswordAuthenticationToken(username, password));
 
         return "redirect:/home";
     }
