@@ -119,12 +119,74 @@ public class CarController {
     public ResponseEntity<List<Car>> filterCars(@RequestBody Filter filter){
         List<Car> filteredCars = new ArrayList<Car>();
         List<Car> allCars = carService.findAll();
+
+        for(Car car: allCars){
+            if(
+                    (car.getManufacturer().equals(filter.getManufacturer())) &&
+                            (car.getPrice() >= filter.getMinPrice()) &&
+                            (car.getPrice() <= filter.getMaxPrice()) &&
+                            (car.getMilage() >= filter.getMinMilage()) &&
+                            (car.getMilage() <= filter.getMaxMilage()) &&
+                            (car.getManufactureYear() >= filter.getMinManufactureYear()) &&
+                            (car.getManufactureYear() <= filter.getMaxManufactureYear())
+                    ){
+                filteredCars.add(car);
+            }
+        }
+
         // todo: implement filters
         return new ResponseEntity<List<Car>>(filteredCars, HttpStatus.OK);
     }
 
 
+    @RequestMapping(value = "public/getFavouriteCars", method = RequestMethod.GET)
+    public ResponseEntity<List<Car>> filterCars(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        User user = userService.findUserByEmail(name);
 
+        List<Car> favCars = new ArrayList<Car>();
+
+        for(int id: user.getFavouriteCars()){
+            Car car = carService.findCarById(id);
+            favCars.add(car);
+        }
+
+
+        return new ResponseEntity<List<Car>>(favCars, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "public/addFavouriteCar/{carId}", method = RequestMethod.GET)
+    public ResponseEntity<Void> addFavouriteCar(@PathVariable long carId){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        User user = userService.findUserByEmail(name);
+
+        Car car = carService.findCarById(carId);
+
+        if(car != null){
+            user.getFavouriteCars().add((int) carId);
+            userService.saveUser(user);
+        }
+
+
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+
+
+    @RequestMapping(value = "public/deleteFavouriteCar/{carId}", method = RequestMethod.GET)
+    public ResponseEntity<Void> deleteFavouriteCar(@PathVariable long carId){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        User user = userService.findUserByEmail(name);
+
+        if(user.getFavouriteCars().contains(carId)){
+            user.getFavouriteCars().remove(carId);
+        }
+
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 
 
 }
