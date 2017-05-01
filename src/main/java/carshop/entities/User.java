@@ -1,6 +1,8 @@
 package carshop.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,6 +30,25 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "user_car", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "car_id"))
     private Set<Car> cars;
+
+    @ElementCollection
+    private List<Integer> favouriteCars = new ArrayList<Integer>();
+
+    public Set<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
+    }
+
+    public List<Integer> getFavouriteCars() {
+        return favouriteCars;
+    }
+
+    public void setFavouriteCars(List<Integer> favouriteCars) {
+        this.favouriteCars = favouriteCars;
+    }
 
     public int getActive() {
         return active;
