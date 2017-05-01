@@ -26,11 +26,13 @@ public class CarController {
 
     @RequestMapping(value = "public/addCar",  method = RequestMethod.POST)
     public ResponseEntity<Car> addCar(@RequestBody Car car){
-        Car newCar = car;
+
+        // get the current user;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName();
-
         User user = userService.findUserByEmail(name);
+
+        Car newCar = car;
         newCar.setUser(user);
         carService.saveCar(newCar);
         //user.addCar(newCar);
@@ -38,10 +40,18 @@ public class CarController {
         return new ResponseEntity<Car>(newCar, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "public/getCar",  method = RequestMethod.GET)
-    public ResponseEntity<Car> getCar(){
-        Car car = new Car();
-        car.setManufacturer("Mercedes");
+    @RequestMapping(value = "public/getCar/{carId}",  method = RequestMethod.GET)
+    public ResponseEntity<Car> getCar(@PathVariable int carId){// get the current user;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName();
+        User user = userService.findUserByEmail(name);
+
+        Car car = carService.findCarById(carId);
+
+
+
         return new ResponseEntity<Car>(car, HttpStatus.OK);
     }
+
+
 }
