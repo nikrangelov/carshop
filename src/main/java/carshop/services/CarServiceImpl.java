@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 @Service("carService")
 public class CarServiceImpl implements CarService{
@@ -47,6 +48,15 @@ public class CarServiceImpl implements CarService{
         return carRepository.findAll(request);
     }
 
+    @Override
+    public void deleteCar(Car car){
+        carRepository.delete(car);
+    }
+
+    @Override
+    public List<Car> findAll(){
+        return carRepository.findAll();
+    }
 
 
 }
