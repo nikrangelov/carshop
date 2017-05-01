@@ -18,6 +18,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.WebRequest;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +38,7 @@ public class CarController {
     CarService carService;
 
     @RequestMapping(value = "private/addCar",  method = RequestMethod.POST)
-    public ResponseEntity<Car> addCar(WebRequest request, Model model){
+    public void addCar(WebRequest request, HttpServletResponse response, Model model) throws IOException {
 
         // get the current user;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -50,13 +52,10 @@ public class CarController {
         car.setMilage(Integer.parseInt(request.getParameter("milage")));
         car.setManufactureYear(Integer.parseInt(request.getParameter("manufactureYear")));
 
-
-
         car.setUser(user);
         carService.saveCar(car);
-        //user.addCar(newCar);
 
-        return new ResponseEntity<Car>(car, HttpStatus.OK);
+        response.sendRedirect("/add_car-success");
     }
 
     @RequestMapping(value = "public/getCar/{carId}",  method = RequestMethod.GET)

@@ -1,52 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-
 <head>
-    <title>Hello</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CarShop</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 </head>
 
 <body>
-<div class="col-md-4" style="padding:10px 10px">
-    <form action="/logout" method="post">
-        <input type="submit" value="Log Out"/>
-    </form>
+
+<div class="container" style="margin-top: 50px;">
+    <div th:if="${success}" class="alert alert-success">
+        <strong>Success!</strong> Post successful.
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-7 col-lg-6">
+            <form th:action="@{/private/addCar}" method="post">
+                <div class="form-group">
+                    <label for="makeInput" class="control-label">Make: </label>
+                    <select class="form-control" id="makeInput" name="manufacturer">
+                        <option value="Volvo">Volvo</option>
+                        <option value="Saab">Saab</option>
+                        <option value="Mercedes">Mercedes</option>
+                        <option value="Audi">Audi</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="modelInput" class="control-label">Model: </label>
+                    <input class="form-control" id="modelInput" name="model" type="text" placeholder="Model" /><br />
+                </div>
+                <div class="form-group">
+                    <label for="priceInput" class="control-label">Price: </label>
+                    <input class="form-control" id="priceInput" name="price" type="number" placeholder="Price" min="20"/><br />
+                </div>
+                <div class="form-group">
+                    <label for="milageInput" class="control-label">Milage: </label>
+                    <input class="form-control" id="milageInput" name="milage" type="number" placeholder="Milage" min="20"/><br />
+                </div>
+                <div class="form-group">
+                    <label for="yearInput" class="control-label">Manufacture year: </label>
+                    <input class="form-control" id="yearInput" name="manufactureYear" type="number" placeholder="Manufacture Year" min="1800"/><br />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" name="submit" type="submit">Add car</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-
-<script>
-    $.ajax({
-        xhrFields: {
-            withCredentials: true
-        },
-        type: "GET",
-        url: "http://localhost:8080/private/greeting"
-    }).done(function (data) {
-        console.log(data);
-    });
-</script>
-
-<div class='container'>
-    <div id='root'> Halloooo </div>
-</div>
-
-
-<form th:action="@{/private/addCar}" method="post">
-    <!-- <input name="manufacturer" type="text" placeholder="Manufacturer" /><br /> -->
-    <select name="manufacturer">
-        <option value="Volvo">Volvo</option>
-        <option value="Saab">Saab</option>
-        <option value="Mercedes">Mercedes</option>
-        <option value="Audi">Audi</option>
-    </select>
-    <br />
-    <input name="model" type="text" placeholder="Model" /><br />
-    <input name="price" type="number" placeholder="Price" min="20"/><br />
-    <input name="milage" type="number" placeholder="Milage" min="20"/><br />
-    <input name="manufactureYear" type="number" placeholder="Manufacture Year" min="1800"/><br />
-    <button name="submit" type="submit">Add car</button>
-</form>
 
 </body>
 </html>

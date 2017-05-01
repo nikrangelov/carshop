@@ -20,7 +20,7 @@ import java.util.List;
 @Service("carService")
 public class CarServiceImpl implements CarService{
 
-    private static final int PAGE_SIZE = 2;
+    private static final int PAGE_SIZE = 5;
 
     @Autowired
     private CarRepository carRepository;
