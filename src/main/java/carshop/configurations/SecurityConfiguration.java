@@ -29,38 +29,22 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                    .antMatchers("/private/**").hasRole("USER")
+                    .antMatchers("/private/**", "/home").hasRole("USER")
+                    .antMatchers("/css/**", "/fonts/**", "/js/**").permitAll()
+                    .antMatchers("/register").permitAll()
                 .and()
-                    .formLogin() .defaultSuccessUrl("/home.html")
+                    .formLogin().loginPage("/login").failureUrl("/login-error")
+                    .defaultSuccessUrl("/")
         .and()
                 .httpBasic()
                 .and()
                 .csrf().disable()
                 .logout()
                 .logoutSuccessUrl("/");
-                //.loginPage("/login.html")
-                //.loginProcessingUrl("/perform_login")
-                //.defaultSuccessUrl("/index.html",true)
-                //.failureUrl("/login.html?error=true");
-
-        /*
-         http.formLogin()
-      .loginPage("/login.html")
-      .loginProcessingUrl("/perform_login")
-      .defaultSuccessUrl("/homepage.html",true)
-      .failureUrl("/login.html?error=true")
-         */
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        /*
-        auth.inMemoryAuthentication()
-                    .withUser("niki").password("nik2098").roles("USER")
-                .and()
-                    .withUser("admin").password("admin2098").roles("USER", "ADMIN");
-     */
-
         auth.
                 jdbcAuthentication()
                 .usersByUsernameQuery(usersQuery)

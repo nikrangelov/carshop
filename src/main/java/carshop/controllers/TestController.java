@@ -36,20 +36,6 @@ public class TestController {
         return "Private data! " + name;
     }
 
-
-    @RequestMapping(value = "public/createUser",  method = RequestMethod.GET)
-    public String createUser(){
-       Role role = new Role();
-       role.setRole("ROLE_USER");
-       roleRepository.save(role);
-
-        User user = new User();
-        user.setEmail("nik@nik.com");
-        user.setPassword("qaz20");
-        userService.saveUser(user);
-        return "User created!";
-    }
-
     @RequestMapping(value = "private/greeting", method=RequestMethod.GET)
     public @ResponseBody Greeting sayHello(){
         return new Greeting(1, "Hello stranger");
