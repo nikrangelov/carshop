@@ -1,52 +1,51 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-
-
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Hello</title>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CarShop</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <script th:src="@{/js/jquery.min.js}" />
+    <script th:src="@{/js/bootstrap.js}" />
 </head>
-
 <body>
-<div class="col-md-4" style="padding:10px 10px">
-    <form action="/logout" method="post">
-        <input type="submit" value="Log Out"/>
-    </form>
-</div>
 
-<script>
-    $.ajax({
-        xhrFields: {
-            withCredentials: true
-        },
-        type: "GET",
-        url: "http://localhost:8080/private/greeting"
-    }).done(function (data) {
-        console.log(data);
-    });
-</script>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CarShop</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <!-- Nothing interesting here -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li sec:authorize="isAnonymous()"><a th:href="@{/register}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+            </ul>
+        </div>
+    </div>
 
-<div class='container'>
-    <div id='root'></div>
-</div>
+    <div>
+        <a href="#filter" class="btn btn-block btn-info" data-toggle="collapse">Filter</a>
+    </div>
 
+    <div id="filter" class="collapse">
+        <div class="alert alert-info">
+            <strong>Info!</strong> Filter not available yet.
+        </div>
+    </div>
+</nav>
 
-<form th:action="@{/private/addCar}" method="post">
-    <!-- <input name="manufacturer" type="text" placeholder="Manufacturer" /><br /> -->
-    <select name="manufacturer">
-        <option value="Volvo">Volvo</option>
-        <option value="Saab">Saab</option>
-        <option value="Mercedes">Mercedes</option>
-        <option value="Audi">Audi</option>
-    </select>
-    <br />
-    <input name="model" type="text" placeholder="Model" /><br />
-    <input name="price" type="number" placeholder="Price" min="20"/><br />
-    <input name="milage" type="number" placeholder="Milage" min="20"/><br />
-    <input name="manufactureYear" type="number" placeholder="Manufacture Year" min="1800"/><br />
-    <button name="submit" type="submit">Add car</button>
-</form>
 
 
 </body>
