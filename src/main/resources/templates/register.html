@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Carshop Registration</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/css/login.css}"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+
+        <div th:if="${failure}" class="alert alert-danger">
+            <strong>Error!</strong> Failed to register!
+        </div>
+
+        <div th:if="${success}" class="alert alert-success">
+            <strong>Success!</strong> Registration successful!
+        </div>
+
+        <p id="profile-name" class="profile-name-card"></p>
+        <form class="form-signin" th:action="@{/login}" method="post">
+            <input type="text" id="inputEmail" class="form-control" placeholder="Username" name="username" required="" autofocus=""/>
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password" required=""/>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" name="submit" type="submit">Sign in</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
