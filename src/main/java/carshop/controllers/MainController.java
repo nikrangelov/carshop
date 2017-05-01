@@ -15,4 +15,9 @@ public class MainController {
     public String home() {
         return "home";
     }
+
+    @RequestMapping(value = "/add_car")
+    public String addCar() {
+        return "add_car";
+    }
 }

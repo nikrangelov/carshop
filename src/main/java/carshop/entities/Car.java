@@ -30,7 +30,7 @@ public class Car {
     private int milage;
 
     @Column(name = "manufacture_date")
-    private Date manufactureDate;
+    private int manufactureYear;
 
     @Column(name = "post_date")
     private Date postDate;
@@ -88,12 +88,12 @@ public class Car {
         this.milage = milage;
     }
 
-    public Date getManufactureDate() {
-        return manufactureDate;
+    public int getManufactureYear() {
+        return manufactureYear;
     }
 
-    public void setManufactureDate(Date manufactureDate) {
-        this.manufactureDate = manufactureDate;
+    public void setManufactureYear(int manufactureYear) {
+        this.manufactureYear = manufactureYear;
     }
 
     public Date getPostDate() {
