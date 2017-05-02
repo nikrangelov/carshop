@@ -10,6 +10,7 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.js}"></script>
+    <script th:src="@{js/waitingDialog.js}"></script>
     <script th:src="@{/js/listing.js}"></script>
 </head>
 <body>
@@ -48,7 +49,13 @@
     </div>
 </nav>
 
+<div class="text-center" id="paginationTop">
+</div>
+
 <div id="listing" class="container">
+</div>
+
+<div class="text-center" id="paginationBottom">
 </div>
 
 </body>
